@@ -1,0 +1,41 @@
+*{
+    font-family: Verdana;
+    letter-spacing: 0.4em;
+    text-transform: lowercase;
+}
+.body{
+
+}
+.header{
+    width: 100vw;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+.header_left,
+.header_right{
+    width: 50vw;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+#welcome_name,
+#welcome_day{
+    margin-left: 0.8em;
+}
+main{
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 0.3fr repeat(5, 1fr);
+    grid-template-rows: 1fr;
+}
+.table_column{
+    height: 70vh;
+    display: grid;
+    grid-template-rows: repeat(9, 1fr);
+}
+#column_food{
+    grid-column: 2 / 5;
+}
+.days{
+}
