@@ -14,14 +14,8 @@ body{
     width: 70vw;
     height: 50px;
     text-align: center;
-    -webkit-touch-callout: none; /* iOS Safari */
-    -webkit-user-select: none; /* Safari */
-    -khtml-user-select: none; /* Konqueror HTML */
-    -moz-user-select: none; /* Old versions of Firefox */
-    -ms-user-select: none; /* Internet Explorer/Edge */
-    user-select: none; /* Non-prefixed version, currently
-                                  supported by Chrome, Edge, Opera and Firefox */
-    margin: 20vh auto -5vh auto;
+
+     margin: 20vh auto -5vh auto;
 }
 .title-box h1{
 
@@ -77,4 +71,11 @@ body{
 }
 .login-button:hover{
     background-color: rgba(93, 165, 183, 0.33);
+}
+
+#clickable__title{
+    background-color: rgba(0,0,0,0.1);
+    border: transparent;
+    font-size: 0.5em
+;
 }
