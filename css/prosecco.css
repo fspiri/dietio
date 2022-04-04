@@ -20,9 +20,7 @@
     margin-left: 0.8em;
 }
 main{
-
     width: 80vw;
-    border: 1px solid black;
     grid-gap: 2px;
     background-color: black;
     margin: auto;
@@ -35,11 +33,7 @@ main{
 }
 #column_day > div {
 }
-#column_weight > p{
-    background-color: aquamarine;
-}
 #column_cost > p{
-    background-color: aquamarine;
 }
 .table_column{
     position: relative;
@@ -57,14 +51,29 @@ main{
 }
 .table_column > div{
     position: inherit;
-    background-color: aqua;
+    /* background-color: aqua; */
+    background-color: rgba(0,0,0,0.3);
     width: 100%;
     height: fit-content;
+    min-height: calc(1em + 4px); !important;
     display: grid;
+    margin: 2px 0;
+}
+.card{
+    display: flex;
+    justify-content: center;
+    background-color: yellow;
+    margin: 2px auto;
+    width: 90%;
 }
 p{
     display: inline;
     margin: 0;
 }
-.days{
+.change_day_button{
+    width: 2em;
+    height: 2em;
+    background-color: black;
+    position: relative;
+    margin: auto;
 }
