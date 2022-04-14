@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../css/spritz.css">
+</head>
+<body>
+<header class="header">
+    <div class="header_left" id="welcome_1">
+        <h5>Welcome</h5>
+        <h5 id="welcome_name"> Francesco</h5>
+    </div>
+    <div class="header_right" id="welcome_2">
+        <input type="button" class="change_day_button" id="before_button" onclick="changeDay(0)">
+        <h5>diet of </h5>
+        <h5 id="welcome_day"> Saturday</h5>
+        <input type="button" class="change_day_button" id="next_button" onclick="changeDay(1)">
+    </div>
+</header>
+<main class="main">
+    <div class="cards" id="breakfast_cards">
+        <p class="day_h3">breakfast</p>
+        <div class="table_column">
+            <div class="daily_foods" id="breakfast_foods">
+                <div class="food_card"><p>coffee</p></div>
+                <div class="food_card"><p>egg - 60g</p></div>
+            </div>
+        </div>
+    </div>
+    <div class="cards" id="break_one_cards">
+        <p class="day_h3">break_one</p>
+        <div class="table_column">
+            <div class="daily_foods" id="break_one_foods">
+                <div class="food_card"><p>bread - 60g</p></div>
+                <div class="food_card"><p>prosciutto - 60g</p></div>
+            </div>
+        </div>
+    </div>
+    <div class="cards"id="lunch_cards">
+        <p class="day_h3">lunch</p>
+        <div class="table_column">
+            <div class="daily_foods" id="lunch_foods">
+                <div class="food_card"><p>pasta - 100g</p></div>
+                <div class="food_card"><p>passata di pomodoro - 40g</p></div>
+                <div class="food_card"><p>broccoli - 150g</p></div>
+                <div class="food_card"><p>petto di tacchino - 100g</p></div>
+            </div>
+        </div>
+    </div>
+    <div class="cards" id="break_two_cards">
+        <p class="day_h3">break two</p>
+        <div class="table_column">
+            <div class="daily_foods" id="break_two_foods">
+                <div class="food_card"><p>yogurt - 150g</p></div>
+            </div>
+        </div>
+    </div>
+    <div class="cards" id="dinner_cards">
+        <p class="day_h3">dinner</p>
+        <div class="table_column" id="column_food">
+            <div class="daily_foods" id="dinner_foods">
+                <div class="food_card"><p>merluzzo - 250g</p></div>
+                <div class="food_card"><p>barbabietole - 150g</p></div>
+                <div class="food_card"><p>bread - 60g</p></div>
+            </div>
+        </div>
+    </div>
+</main>
+
+</body>
+</html>
