@@ -48,7 +48,7 @@ you can now reach the project in
     http://127.0.0.1:8000/
 
 ***
-###Using PyCharm
+### Using PyCharm
 
 1- Open the cloned repo in PyCharm
 
