@@ -49,6 +49,7 @@ you can now reach the project in
 
 ***
 ###Using PyCharm
+
 1- Open the cloned repo in PyCharm
 
 2-  Wait for PyCharm to download all the dependencies, then run these scripts in the PyCharm internal terminal to:
