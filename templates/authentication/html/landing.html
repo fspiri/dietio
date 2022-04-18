@@ -1,0 +1,55 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Landing</title>
+    <link rel="stylesheet" href="{% static 'css/acqua.css' %}">
+</head>
+
+
+<body>
+{% for message in messages %}
+<div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+    <strong>Message: </strong> {{ message }}
+    <button type="button" class="close" data-dismiss="alert" aria-label="close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+{% endfor %}
+
+<div class="title-box">
+    <h1>dietio</h1>
+</div>
+
+<div class="login-info-container">
+    <div id="login-container-one"></div>
+    <div  id="login-container-two"></div>
+    <div class="container">
+
+        <div class="login-textbox-container">
+            <form action="/signin" method="post">
+                {% csrf_token %}
+                <input type="text" id="user" name="user" placeholder="user" class="login-textbox">
+                <input type="password" id="password" name="password" placeholder="password" class="login-textbox">
+                <a href="/signin">
+                    <input type="submit" class="login-button" value="login" id="login-button">
+                </a>
+            </form>
+
+        </div>
+
+        <div class="login-button-container">
+                <a href="/signup">
+                    <input type="submit" class="login-button" id="register_button" value="register">
+                </a>
+
+
+        </div>
+
+    </div>
+
+</div>
+<script src="" async defer></script>
+</body>
+</html>

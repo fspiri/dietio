@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Landing</title>
+    <link rel="stylesheet" href="{% static 'css/acqua.css' %}">
+</head>
+<body>
+{% for message in messages %}
+<div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+    <strong>Message: </strong> {{ message }}
+    <button type="button" class="close" data-dismiss="alert" aria-label="close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+{% endfor %}
+<div class="title-box">
+    <form action="landing.html">
+        <input  type="submit" id="clickable__title" value="already-registered">
+        <h1>app_name</h1>
+
+    </form>
+
+</div>
+
+<div class="login-info-container">
+    <div class="container">
+        <div class="login-textbox-container">
+            <form action="/signup" method="post">
+                {% csrf_token %}
+                <input type="text"  id="user" name="user" placeholder="username" class="login-textbox">
+                <input type="email" id="email" name="email" placeholder="email" class="login-textbox">
+                <input type="password" id="pass1" name="pass1" placeholder="password" class="login-textbox">
+                <input type="password" id="pass2" name="pass2" placeholder="repeat-password" class="login-textbox">
+                <input type="submit" class="login-button" id="register_button" value="register">
+            </form>
+        </div>
+    </div>
+
+</div>
+    <script src="" async defer></script>
+</body>
+</html>

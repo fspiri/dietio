@@ -1,0 +1,122 @@
+:root{
+
+    --accents-color: 0, 216, 200;
+    --lightest-salmon: 255, 211, 174;
+    --salmon: 255, 104, 66;
+    --dark-salmon: 131, 91, 50;
+    --white: 255, 255, 255;
+}
+*{
+    font-family: Verdana;
+    letter-spacing: 0.4em;
+    text-transform: lowercase;
+    margin: 0;
+}
+body{
+    background-color: rgb(var(--salmon));
+}
+.header{
+    background-color: var(--dark-salmon);
+    width: 100vw;
+    height: 3em;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+.header_left,
+.header_right{
+    color: #fff;
+    position: relative;
+    width: 50vw;
+    margin: auto 0;
+    line-height: 1em;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+#welcome_name,
+#welcome_day{
+    margin-left: 0.8em;
+}
+main{
+    width: 80vw;
+    grid-gap: 2px;
+    /*background-color: black;*/
+    background-color: rgba(var(--dark-salmon), 0.4);
+    border-radius: 1em;
+    margin: auto;
+    display: grid;
+    grid-template-columns: 0.3fr repeat(5, 1fr);
+}
+
+
+#column_food >div{
+}
+#column_cost > p{
+}
+.table_column{
+    position: relative;
+    height: fit-content;
+
+    display: grid;
+    /*grid template rows automatic*/
+    grid-template-columns: 1fr;
+    /*background: white;*/
+    justify-content: center;
+    text-align: center;
+}
+#column_food{
+    grid-column: 2 / 6;
+}
+#day_8{
+    background-color: rgba(var(--lightest-salmon), 0.7);
+    border-bottom-left-radius: 30px;
+}
+#total_foods{
+    background-color: rgba(var(--lightest-salmon), 0.7);
+}
+#cost_8{
+    background-color: rgba(var(--lightest-salmon), 0.7);
+    border-bottom-right-radius: 30px;
+}
+.days_parent{
+    background-color: white;
+}
+#day_1, #day_2, #day_3, #day_4,
+#day_5, #day_6, #day_7{
+    position: inherit;
+    height: 1px;
+    overflow: hidden;
+    color: black;
+    display: flex;
+    /*background-color: rgba(var(--lightest-salmon), 0.7);*/
+}
+.table_column > div{
+    position: inherit;
+    /* background-color: aqua; */
+    /*background-color: rgb(var(--lightest-salmon));*/
+    width: 100%;
+    height: fit-content;
+    min-height: calc(1em + 4px); !important;
+    display: grid;
+    margin: 1px 0;
+}
+.food_card{
+    display: flex;
+    justify-content: center;
+    background-color: rgb(var(--accents-color));
+    margin: 2px auto;
+    width: 90%;
+}
+p{
+    display: inline;
+    margin: 0;
+}
+.change_day_button{
+    width: 2em;
+    height: 2em;
+    background-color: #fff;
+    border: transparent;
+    position: relative;
+    margin: auto;
+}
+
