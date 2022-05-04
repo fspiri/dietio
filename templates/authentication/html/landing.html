@@ -4,52 +4,51 @@
 <head>
     <meta charset="UTF-8">
     <title>Landing</title>
-    <link rel="stylesheet" href="{% static 'css/acqua.css' %}">
+    <link href="../../../static/bootstrap/css/bootstrap_morph.min.css" rel="stylesheet">
 </head>
 
 
-<body>
+<body class="w-100 h-100 d-flex justify-content-center align-items-center">
+
 {% for message in messages %}
-<div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
-    <strong>Message: </strong> {{ message }}
-    <button type="button" class="close" data-dismiss="alert" aria-label="close">
-        <span aria-hidden="true">&times;</span>
-    </button>
-</div>
+    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert" id="alert">
+        <strong id="alert-message">Message: </strong> {{ message }}
+    </div>
 {% endfor %}
 
-<div class="title-box">
-    <h1>dietio</h1>
+<div class="title-box w-100 d-flex justify-content-center align-items-center my-auto">
+    <h1 class="mx-auto">dietio</h1>
 </div>
 
-<div class="login-info-container">
-    <div id="login-container-one"></div>
-    <div  id="login-container-two"></div>
-    <div class="container">
-
-        <div class="login-textbox-container">
-            <form action="/signin" method="post">
-                {% csrf_token %}
-                <input type="text" id="user" name="user" placeholder="user" class="login-textbox">
-                <input type="password" id="password" name="password" placeholder="password" class="login-textbox">
-                <a href="/signin">
-                    <input type="submit" class="login-button" value="login" id="login-button">
-                </a>
-            </form>
-
+<form action="/signin" method="post" class="w-100 d-flex justify-content-center align-items-center">
+    {% csrf_token %}
+    <fieldset>
+        <div class="form-group">
+            <label for="user" class="form-label mt-4">Email address</label>
+            <input type="text" class="form-control " id="user" aria-describedby="emailHelp"
+                   placeholder="Enter email">
+            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
         </div>
-
-        <div class="login-button-container">
-                <a href="/signup">
-                    <input type="submit" class="login-button" id="register_button" value="register">
-                </a>
-
-
+        <div class="form-group">
+            <label for="password" class="form-label mt-4">Password</label>
+            <input type="password" class="form-control" id="password" name="password" placeholder="Password">
         </div>
+        <input type="submit" value="log-in" id="login-button" class="btn btn-primary my-auto">
+    </fieldset>
+</form>
 
-    </div>
 
-</div>
+<script src="../../../static/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script>
+    setTimeout(fade_out, 3000);
+
+    function fade_out() {
+        $("#alert").fadeOut().empty();
+    }
+
+    $(".login-form")[0].reset(); // this is to reset the form
+</script>
 <script src="" async defer></script>
+<script src="../../../static/bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

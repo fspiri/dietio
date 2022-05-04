@@ -117,3 +117,6 @@ def activate(request, uidb64, token):
         return redirect('home')
     else:
         return render(request, 'authentication/html/activation_failed.html')
+
+def select(request):
+    return render(request, 'authentication/html/select_how_to_create.html')
