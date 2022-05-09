@@ -1,5 +1,27 @@
-1 - search a way by which the string content can be retrieved:
+DONE - search a way by which the string content can be retrieved:
     -> language swap options
+
+Now that i have a reliable way by which to extract info from the input boxes, i should find a way to arrange them into a JSON file.
+    the data structure for now is like.
+    They should be decided based on the active table.
+    for active_table_n all the data should be grouped into a single chunk.
+    What's the best way to do so?
+
+{ 'table' : 'table_0', 'food_name': 'example_name', 'food_quantity': '0', 'food_calories' : '0', 'food_proteins': '0', 'food_cost': '0' }
+            breakfast    name                         quantity              calories                proteins            cost
+
+    To create:
+    - Count how many rows a table has.
+    - Then count and divide data in chunks of 5, assigning 0 to data that's null.
+    - Then divide on multiple of five based on how many rows there are in tables.
+    - Convert data into JSON format as before.
+
+    js function to help with JSON conversion:
+        - data to JSON: stringify(); better yet: toJSON();
+        - JSON to data: parse();
+
+
+
 
 2 - should each user input their statistics?
     PROS
@@ -8,4 +30,4 @@
     CONS
         slower and more difficult profile-creation process
 
-    x
+Now that
