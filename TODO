@@ -21,6 +21,12 @@ Now that i have a reliable way by which to extract info from the input boxes, i 
         - JSON to data: parse();
 
 
+TODO 10-5
+    DONE - Gather data from all rows of nested tables - start: 10.23, finish:11.25
+    - convert data into object adn then into JSON - start:11.40, finish: 12.00
+    - the moment of creating REST APIs has come
+    -
+
 
 
 2 - should each user input their statistics?

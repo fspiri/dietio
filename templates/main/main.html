@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Landing</title>
+    <link href="../../static/bootstrap/css/bootstrap_morph.min.css" rel="stylesheet">
+</head>
+
+<body class="w-100 h-100 d-grid justify-content-center align-items-center mx-auto" onload="setUserName()">
+
+{% for message in messages %}
+    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert" id="alert">
+        <strong id="alert-message">Message: </strong> {{ message }}
+    </div>
+{% endfor %}
+
+<header class="title-box w-100 justify-content-center align-items-center text-center"
+        style="display:grid; grid-template-columns: 1fr 1fr 1fr; margin-top: 2vh;">
+    <div class="d-flex justify-content-center align-items-center " style="margin-left: 5vw; grid-column-start: 0;">
+        <small class="form-text" style="font-size: 1.3em;">welcome: </small>
+        <h1 style="font-size: 2.5em;" id="username_title margin:auto">{{ user }}</h1>
+    </div>
+    <div class="d-flex justify-content-center align-items-center" style="margin-right: 5vw; grid-column-start: 3;">
+        <h1 style="font-size: 2.5em;" id="todays_date">today</h1>
+        <small class="form-text" style="font-size: 1.3em;">'s diet is </small>
+    </div>
+</header>
+
+<script src="../../static/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<script src="" async defer></script>
+<script src="../../static/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="../../static/js/main/boot.js"></script>
+</body>
+</html>

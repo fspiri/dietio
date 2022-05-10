@@ -7,8 +7,7 @@
     <link href="../../../static/bootstrap/css/bootstrap_morph.min.css" rel="stylesheet">
 </head>
 
-
-<body class="w-100 h-100 d-flex justify-content-center align-items-center">
+<body class="w-100 h-100 d-grid justify-content-center align-items-center mx-auto">
 
 {% for message in messages %}
     <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert" id="alert">
@@ -16,38 +15,50 @@
     </div>
 {% endfor %}
 
-<div class="title-box w-100 d-flex justify-content-center align-items-center my-auto">
-    <h1 class="mx-auto">dietio</h1>
+
+<div class="title-box w-100 d-grid justify-content-center align-items-center text-center"
+     style="margin-top: 17vh;">
+    <small class="form-text text-muted" style="font-size: 1.3em;">welcome to</small>
+    <h1 style="font-size: 5em;">dietio</h1>
 </div>
 
-<form action="/signin" method="post" class="w-100 d-flex justify-content-center align-items-center">
+<form action="/signin" method="post" class="w-100 d-grid justify-content-center align-items-center">
     {% csrf_token %}
     <fieldset>
         <div class="form-group">
-            <label for="user" class="form-label mt-4">Email address</label>
-            <input type="text" class="form-control " id="user" aria-describedby="emailHelp"
-                   placeholder="Enter email">
-            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            <label for="user" class="form-label mt-4">username</label>
+            <input type="text" class="form-control" id="user" name="user" placeholder="username">
+
         </div>
         <div class="form-group">
-            <label for="password" class="form-label mt-4">Password</label>
+            <label for="password" class="form-label mt-4">password</label>
             <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+            <small id="emailHelp" class="form-text text-muted">we'll never share your data with anyone else</small>
         </div>
-        <input type="submit" value="log-in" id="login-button" class="btn btn-primary my-auto">
+        <div style="display: flex; justify-content: center; align-items: center; margin-top:50px;">
+            <input type="submit" value="log-in" id="login-button" class="btn btn-primary my-auto">
+        </div>
+
     </fieldset>
 </form>
+<div style="display: flex; justify-content: center; align-items: center; margin-top: 25px;">
+    <form action="/signup">
+        <input type="submit" value="sign-up" id="signup-button" class="btn btn-secondary my-auto">
+    </form>
+</div>
 
 
 <script src="../../../static/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script>
-    setTimeout(fade_out, 3000);
+<!-- <script>
+   setTimeout(fade_out, 3000);
 
-    function fade_out() {
-        $("#alert").fadeOut().empty();
-    }
+   function fade_out() {
+       $("#alert").fadeOut().empty();
+   }
 
-    $(".login-form")[0].reset(); // this is to reset the form
+   $(".login-form")[0].reset(); // this is to reset the form
 </script>
+-->
 <script src="" async defer></script>
 <script src="../../../static/bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>

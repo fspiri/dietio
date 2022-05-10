@@ -8,16 +8,20 @@ from django.shortcuts import render, redirect
 from django.template.loader import render_to_string
 from django.utils.encoding import force_bytes, force_str
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.core.exceptions import ValidationError
+from django.core.validators import validate_email
 
 from dietio import settings
 from .tokens import generate_token
+
+user = None
 
 
 def home(request):
     return render(request, "authentication/html/landing.html")
 
-def signup(request):
 
+def signup(request):
     if request.method == 'POST':
         username = request.POST['user']
         email = request.POST['email']
@@ -42,9 +46,9 @@ def signup(request):
             messages.error(request, "Username must be alphanumeric")
             return redirect('home')
 
-
         myuser = User.objects.create_user(username, email, password1)
-        myuser.is_active = False
+        # this is going to be useful once i can introduce a realiable way to send confirmation emails
+        # myuser.is_active = False
 
         myuser.save()
 
@@ -58,7 +62,7 @@ def signup(request):
 
         send_mail(subject, body, sender, to_list, fail_silently=True)
 
-        #email address confirmation email
+        # email address confirmation email
         current_site = get_current_site(request)
         email_subject = "confirm your dietio email"
         email_message = render_to_string('authentication/html/email_confirmation.html', {
@@ -74,7 +78,7 @@ def signup(request):
             settings.EMAIL_HOST_USER,
             [myuser.email]
         )
-        email.fail_silenty=True
+        email.fail_silenty = True
         email.send()
         return redirect("signin")
 
@@ -83,14 +87,18 @@ def signup(request):
 
 def signin(request):
     if request.method == 'POST':
-        user = request.POST['user']
-        password = request.POST['password']
+        global user
+        user = request.POST.get('user')
+        password = request.POST.get('password')
+
+        # messages.success(request, user)
+        # messages.success(request, password)
 
         user = authenticate(username=user, password=password)
 
         if user is not None:
             login(request, user)
-            return render(request, "authentication/html/daily.html")
+            return render(request, "main/main.html")
 
         else:
             messages.error(request, "wrong credentials")
@@ -98,10 +106,12 @@ def signin(request):
 
     return render(request, "authentication/html/landing.html")
 
+
 def signout(request):
     logout(request)
     messages.success(request, "Logged out successfully")
     return redirect('home')
+
 
 def activate(request, uidb64, token):
     try:
@@ -118,5 +128,6 @@ def activate(request, uidb64, token):
     else:
         return render(request, 'authentication/html/activation_failed.html')
 
-def select(request):
-    return render(request, 'authentication/html/select_how_to_create.html')
+
+def get_user_name():
+    return user
