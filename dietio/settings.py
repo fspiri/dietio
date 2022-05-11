@@ -45,9 +45,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'create_new_diet',
     'edit_diet',
     'main',
+    'diets',
 ]
 
 MIDDLEWARE = [
