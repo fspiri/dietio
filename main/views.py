@@ -1,17 +1,25 @@
-from django.http import HttpResponse
 from django.shortcuts import render
-from bs4 import BeautifulSoup as bs
-import os
-import re
+
+from diets.models import DietTable
 
 # Create your views here.
 user = None
 
 
-def loadmain(request):
+def usr_diet(request):
     return render(request, 'main/main.html')
 
 
-def setUser(userName):
+def load_main(request):
+    diet_list = DietTable.objects.all()
+
+    return render(request, 'main/main.html',
+                  {
+                      'diet_list': diet_list,
+                      'user': request.user.username,
+                  })
+
+
+def setUser(user_name):
     global user
-    user = userName
+    user = user_name
