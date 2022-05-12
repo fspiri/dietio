@@ -7,59 +7,77 @@ class DietTypes(models.Model):
     dietType = models.CharField(max_length=10)
 
     def __str__(self):
-        return self.dietType
+        return str(self.dietType)
 
 
 class FoodTable(models.Model):
     food_id = models.AutoField(primary_key=True)
     foodName = models.CharField(max_length=20)
-    calories = models.IntegerField()
-    proteins = models.IntegerField()
-    carbohydrates = models.IntegerField()
-    fats = models.IntegerField()
-    cost = models.FloatField()
+    calories = models.FloatField(null=True, blank=True)
+    proteins = models.FloatField(null=True, blank=True)
+    carbohydrates = models.FloatField(null=True, blank=True)
+    fats = models.FloatField(null=True, blank=True)
+    cost = models.FloatField(null=True, blank=True)
 
     def __str__(self):
-        return self.foodName
+        return str(self.foodName)
 
 
-class MealTable(models.Model):
+class SingleMealRowTable(models.Model):
     meal_id = models.AutoField(primary_key=True)
     food_id = models.ForeignKey(FoodTable, on_delete=models.PROTECT)
     quantity = models.IntegerField()
 
     def __str__(self):
-        return self.meal_id
+        return str(self.meal_id)
 
 
-class MealFoodTable(models.Model):
+class GroupMealTable(models.Model):
     mealFood_id = models.AutoField(primary_key=True)
-    meal_id = models.ForeignKey(MealTable, on_delete=models.CASCADE)
+    mealNumber_id = models.IntegerField(null=False, default=-1)
+    meal_id_1 = models.ForeignKey(SingleMealRowTable, on_delete=models.CASCADE)
+    meal_id_2 = models.ForeignKey(SingleMealRowTable, blank=True, null=True, related_name='%(class)s_requests_2',
+                                  on_delete=models.CASCADE)
+    meal_id_3 = models.ForeignKey(SingleMealRowTable, blank=True, null=True, related_name='%(class)s_requests_3',
+                                  on_delete=models.CASCADE)
+    meal_id_4 = models.ForeignKey(SingleMealRowTable, blank=True, null=True, related_name='%(class)s_requests_4',
+                                  on_delete=models.CASCADE)
+    meal_id_5 = models.ForeignKey(SingleMealRowTable, blank=True, null=True, related_name='%(class)s_requests_5',
+                                  on_delete=models.CASCADE)
+    meal_id_6 = models.ForeignKey(SingleMealRowTable, blank=True, null=True, related_name='%(class)s_requests_6',
+                                  on_delete=models.CASCADE)
+    meal_id_7 = models.ForeignKey(SingleMealRowTable, blank=True, null=True, related_name='%(class)s_requests_7',
+                                  on_delete=models.CASCADE)
+    meal_id_8 = models.ForeignKey(SingleMealRowTable, blank=True, null=True, related_name='%(class)s_requests_8',
+                                  on_delete=models.CASCADE)
+    meal_id_9 = models.ForeignKey(SingleMealRowTable, blank=True, null=True, related_name='%(class)s_requests_9',
+                                  on_delete=models.CASCADE)
+    meal_id_10 = models.ForeignKey(SingleMealRowTable, blank=True, null=True, related_name='%(class)s_requests_10',
+                                   on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.mealFood_id
+        return str(self.mealFood_id)
 
 
-class DayOfTheWeek(models.Model):
-    day_id = models.IntegerField(primary_key=True)
-    diet_id = models.ForeignKey("DietTable", on_delete=models.CASCADE)
+class DaysOfTheWeek(models.Model):
+    day_id = models.IntegerField(null=True, default='')
+    diet_id = models.ForeignKey("DietTable", on_delete=models.CASCADE, null=True, blank=True)
     mealOfTheDay = models.IntegerField()
-    mealFood_id = models.ForeignKey(MealFoodTable, on_delete=models.CASCADE)
+    mealFood_id = models.ForeignKey(GroupMealTable, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.day_id
+        return str("diet: " + str(self.diet_id) + " - day: " + str(self.day_id))
 
 
 class DietTable(models.Model):
     diet_id = models.AutoField(primary_key=True)  # to not use the default 'id; given by django
     dietName = models.CharField(max_length=50)
     dietType = models.ForeignKey(DietTypes, on_delete=models.PROTECT)
-    day_id = models.ForeignKey(DayOfTheWeek, on_delete=models.PROTECT)
     startDate = models.DateTimeField()
     dayLength = models.IntegerField()
 
     def __str__(self):
-        return self.dietName
+        return str(str(self.dietName) + "(" + str(self.dayLength) + ")")
 
 
 class UserDietsTable(models.Model):
@@ -67,4 +85,4 @@ class UserDietsTable(models.Model):
     diet_id = models.ForeignKey(DietTable, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.user_id
+        return str(self.user_id)

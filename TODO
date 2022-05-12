@@ -25,9 +25,25 @@ TODO 10-5
     DONE - Gather data from all rows of nested tables - start: 10.23, finish:11.25
     - convert data into object adn then into JSON - start:11.40, finish: 12.00
     - the moment of creating REST APIs has come
-    -
-
-
+TODO 11-5
+    DONE - create database models
+    - list of food to be added
+        - my diet's food lol
+        - meats
+        - fish
+            - can tuna
+        - dairy products
+            - ricotta
+            - mozzarella
+            - parmigiano
+            - milk
+        - cereals
+        - processed cereals
+            - pizza *
+            - pasta *
+            - pane *
+        - vegetables
+        * = versioni integrali, kamut
 
 2 - should each user input their statistics?
     PROS
