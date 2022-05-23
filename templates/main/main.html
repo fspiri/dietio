@@ -7,13 +7,23 @@
     <link href="../../static/bootstrap/css/bootstrap_morph.min.css" rel="stylesheet">
 </head>
 
-<body class="w-100 h-100 d-grid justify-content-center align-items-center mx-auto">
+<body class="w-100 h-100 d-grid justify-content-center align-items-center mx-auto"
+      onload="(load_page(
+              {{ diets_id_list }},
+              {{ days_list }},
+              {{ meal_food_list }}
+
+              ))">
+
 
 {% for message in messages %}
     <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert" id="alert">
         <strong id="alert-message">Message: </strong> {{ message }}
     </div>
 {% endfor %}
+
+
+
 
 <header class="title-box w-100 justify-content-center align-items-center text-center"
         style="display:grid; grid-template-columns: 1fr 1fr 1fr; margin-top: 2vh;">
@@ -30,9 +40,15 @@
 {% block content %}
 
     <strong>
-        {{ user }}
+        <!--{{ user }}-->
 
-        {% for element in diet_list %}
+        {% for element in food %}
+            {{ element }}
+        {% endfor %}
+        {% for element in food_1 %}
+            {{ element }}
+        {% endfor %}
+        {% for element in meals %}
             {{ element }}
         {% endfor %}
     </strong>

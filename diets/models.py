@@ -34,6 +34,7 @@ class SingleMealRowTable(models.Model):
 
 class GroupMealTable(models.Model):
     mealFood_id = models.AutoField(primary_key=True)
+    diet_id = models.ForeignKey("DietTable", on_delete=models.CASCADE, null=True, blank=True)
     mealNumber_id = models.IntegerField(null=False, default=-1)
     meal_id_1 = models.ForeignKey(SingleMealRowTable, on_delete=models.CASCADE)
     meal_id_2 = models.ForeignKey(SingleMealRowTable, blank=True, null=True, related_name='%(class)s_requests_2',

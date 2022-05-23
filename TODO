@@ -52,4 +52,7 @@ TODO 11-5
     CONS
         slower and more difficult profile-creation process
 
-Now that
+TODO 23-5
+    LEARNT that i need to pass values to the js and create the
+        template with js
+    - understand how to pass values to js

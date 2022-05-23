@@ -153,7 +153,6 @@
                         $('pre').html(JSON.stringify(result, undefined, 2));
                         datas = JSON.stringify(result, null, "\t")
                         $('#value').html(datas);
-                        //console.log(datas);
                         format(datas);
                     }
                 });
@@ -196,7 +195,6 @@
                 $('#textbox-2').append("<p>" + formattedString.Conditions[1].Weatherdesc + "</p>")
                 $('#textbox-2').append("<p>" + formattedString.Conditions[1].WeatherCondition + "</p>")
                 $('#textbox-2').append("<p>" + formattedString.Conditions[1].Temperatures + "</p>")
-
 
                 console.log(JSON.stringify(formattedString.Conditions[0].WeatherImgurl))
                 loadButton();
