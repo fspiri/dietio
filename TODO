@@ -56,3 +56,25 @@ TODO 23-5
     LEARNT that i need to pass values to the js and create the
         template with js
     - understand how to pass values to js
+
+TODO 24-5
+    finish passing meals and foods values.
+    at first  I can start by passing all the meals and foods, but
+    it would not be a good idea for later.
+    - Probably will slow down the program or block it completely
+        So what to choose?
+    DONE - passed all the foods and meals in js. The program works fine.
+        - How will it work once there will be more elements?
+
+    QUESTION (on which i will work on later)
+        should I pass all the values to js and then process them in js?
+        - how to do if a user wants to change diet? my mealfoods are passed from python
+            using diet_id as argument ->
+            - I have no way from js to call a python function
+
+TODO 25-5
+    - finish the process refining the values.
+        - STEP 5
+        - STEP 6
+    - check
+

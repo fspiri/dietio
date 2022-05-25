@@ -35,7 +35,7 @@ class SingleMealRowTable(models.Model):
 class GroupMealTable(models.Model):
     mealFood_id = models.AutoField(primary_key=True)
     diet_id = models.ForeignKey("DietTable", on_delete=models.CASCADE, null=True, blank=True)
-    mealNumber_id = models.IntegerField(null=False, default=-1)
+    mealNumberOfTheDay = models.IntegerField(null=False, default=-1)
     meal_id_1 = models.ForeignKey(SingleMealRowTable, on_delete=models.CASCADE)
     meal_id_2 = models.ForeignKey(SingleMealRowTable, blank=True, null=True, related_name='%(class)s_requests_2',
                                   on_delete=models.CASCADE)
@@ -63,8 +63,15 @@ class GroupMealTable(models.Model):
 class DaysOfTheWeek(models.Model):
     day_id = models.IntegerField(null=True, default='')
     diet_id = models.ForeignKey("DietTable", on_delete=models.CASCADE, null=True, blank=True)
-    mealOfTheDay = models.IntegerField()
-    mealFood_id = models.ForeignKey(GroupMealTable, on_delete=models.CASCADE)
+    mealFood_one = models.ForeignKey(GroupMealTable, on_delete=models.CASCADE)
+    mealFood_two = models.ForeignKey(GroupMealTable, on_delete=models.CASCADE, null=True, blank=True,
+                                     related_name='%(class)s_requests_2')
+    mealFood_three = models.ForeignKey(GroupMealTable, on_delete=models.CASCADE, null=True, blank=True,
+                                       related_name='%(class)s_requests_3')
+    mealFood_four = models.ForeignKey(GroupMealTable, on_delete=models.CASCADE, null=True, blank=True,
+                                      related_name='%(class)s_requests_4')
+    mealFood_five = models.ForeignKey(GroupMealTable, on_delete=models.CASCADE, null=True, blank=True,
+                                      related_name='%(class)s_requests_5')
 
     def __str__(self):
         return str("diet: " + str(self.diet_id) + " - day: " + str(self.day_id))
