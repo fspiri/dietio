@@ -313,29 +313,133 @@ function loadPage(
         og_meals_list, og_food_list)
     refineVariables();
     freeLocalVariables();
+    tableCreate();
 }
 
-function tableCreate() {
-    const body = document.body,
-        tbl = document.createElement('table');
-    tbl.style.width = '100%';
-    tbl.style.border = '1px solid black';
-
-    for (let i = 0; i < 3; i++) {
-        const tr = tbl.insertRow();
-
-        for (let j = 0; j < 2; j++) {
-            if (i === 2 && j === 1) {
-                break;
-            } else {
-                const td = tr.insertCell();
-                td.appendChild(document.createTextNode(`Cell I${i}/J${j}`));
-                td.style.border = '1px solid black';
-                if (i === 1 && j === 1) {
-                    td.setAttribute('rowSpan', '2');
+function getMeals(mealGroup) {
+    let meals = [];
+    for (let i = 0; i < refinedMealsList.length; i++) {
+        if (refinedMealsList[i].id === mealGroup.meal_1 ||
+            refinedMealsList[i].id === mealGroup.meal_2 ||
+            refinedMealsList[i].id === mealGroup.meal_3 ||
+            refinedMealsList[i].id === mealGroup.meal_4 ||
+            refinedMealsList[i].id === mealGroup.meal_5 ||
+            refinedMealsList[i].id === mealGroup.meal_6 ||
+            refinedMealsList[i].id === mealGroup.meal_7 ||
+            refinedMealsList[i].id === mealGroup.meal_8 ||
+            refinedMealsList[i].id === mealGroup.meal_9 ||
+            refinedMealsList[i].id === mealGroup.meal_10) {
+            meals.push(refinedMealsList[i])
+        }
+    }
+    let compound = [];
+    for (let i = 0; i < refinedFoodList.length; i++) {
+        for (let j = 0; j < meals.length; j++) {
+            if (refinedFoodList[i].food_id === meals[j].food_id) {
+                let food = {
+                    name: refinedFoodList[i].foodName,
+                    quantity: meals[j].quantity
                 }
+                compound.push(food);
             }
         }
     }
-    body.appendChild(tbl);
+    return compound;
+
+}
+
+function createRows(tBody, meals) {
+
+    for (let j = 0; j < meals.length; j++) {
+        const row = document.createElement('tr');
+        row.style.lineHeight = "2px";
+        //row.style.backgroundColor = "rgba(73,87,133,0.12)";
+
+        for (let i = 0; i < 2; i++) {
+            let tD = document.createElement('td');
+            if (i === 0) {
+                tD.innerText = meals[j].name;
+                tD.colSpan = 3;
+            } else if (i === 1) {
+                tD.innerText = meals[j].quantity + " g";
+            }
+            row.append(tD);
+        }
+
+        tBody.append(row);
+    }
+}
+
+function getCompositeFoodMeals(mealFood) {
+    let meals = [];
+    for (let i = 0; i < refinedMealGroupsList.length; i++) {
+        if (refinedMealGroupsList[i].mealGroup_id === mealFood) {
+            meals = getMeals(refinedMealGroupsList[i]);
+        }
+    }
+    return meals;
+}
+
+function createDivider(tBody, dividerName) {
+    const divider = document.createElement('tr')
+    divider.innerHTML = "<strong>" + dividerName + "</strong>";
+    divider.colSpan = 3;
+    divider.style.pointerEvents = "none";
+    divider.style.lineHeight = "2em";
+    tBody.append(divider);
+}
+
+function tableCreate() {
+
+    const div = document.getElementById("table_space");
+    div.classList.add("modal-content");
+    div.style.borderRadius = "20px";
+    div.style.display = "flex";
+
+    const tbl = document.createElement('table');
+    tbl.classList.add("table");
+    tbl.classList.add("table-hover");
+    tbl.style.width = "90%";
+    tbl.style.marginLeft = "auto";
+    tbl.style.marginRight = "auto";
+    tbl.style.marginTop = "15px";
+    tbl.style.marginBottom = "30px";
+
+
+    const head = document.createElement('thead');
+
+    const headRow = document.createElement('tr')
+    head.append(headRow);
+
+    for (let i = 0; i < 4; i++) {
+        let h = document.createElement('th');
+        h.scope = "col"
+        h.innerText = ""
+        headRow.append(h);
+    }
+    const tBody = document.createElement('tbody');
+
+    createDivider(tBody, "breakfast");
+    createRows(tBody, getCompositeFoodMeals(dietDay.mealfood_one));
+
+
+    createDivider(tBody, "morning snack");
+    createRows(tBody, getCompositeFoodMeals(dietDay.mealfood_two));
+
+
+    createDivider(tBody, "lunch");
+    createRows(tBody, getCompositeFoodMeals(dietDay.mealfood_three));
+
+
+    createDivider(tBody, "afternoon snack");
+    createRows(tBody, getCompositeFoodMeals(dietDay.mealfood_four));
+
+
+    createDivider(tBody, "dinner");
+    createRows(tBody, getCompositeFoodMeals(dietDay.mealfood_five));
+
+
+    tbl.append(head);
+    tbl.append(tBody);
+    div.appendChild(tbl);
 }
