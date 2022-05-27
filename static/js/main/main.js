@@ -39,6 +39,29 @@ let refinedMealsList = [];
 // list of only the foods used by refinedMealsList
 let refinedFoodList = [];
 
+function resetRefinedVariables() {
+    refinedDays = [];
+    dietDay = null;
+    dayMealsGroupIDsList = [];
+    refinedMealGroupsList = [];
+    refinedMealsList = [];
+    refinedFoodList = [];
+}
+
+function checkDay(val) {
+    let length = selectedDiet[2];
+    let dayNum;
+
+    if (val > length) {
+        dayNum = val - (length);
+    } else if (val < 1) {
+        dayNum = (length) - val;
+    } else {
+        dayNum = val;
+    }
+    return dayNum;
+
+}
 
 function setSelectedDietId(val, og_diets_id_list, og_days_list, og_groupmeal_list, og_meals_list, og_food_list) {
     selectedDietId = val;
@@ -51,9 +74,13 @@ function getSelectedDietId() {
 }
 
 function setSelectedDay(val, og_diets_id_list, og_days_list, og_groupmeal_list, og_meals_list, og_food_list) {
-    selectedDay = val;
+    selectedDay = checkDay(val);
+    cleanPage()
+    resetRefinedVariables();
+
     loadPage(og_diets_id_list, og_days_list, og_groupmeal_list,
         og_meals_list, og_food_list);
+
 }
 
 function getSelectedDay() {
@@ -101,9 +128,8 @@ function getDaysList(daysList) {
     //plan is to gather from the DaysOfTheWeekTable all the days_id which have the same id as te selected diet
     let dietDaysList = [];
 
-    for (let i = 0; i < daysList?.length; i++) {
+    for (let i = 0; i < daysList[0].length; i++) {
         if (daysList[0][i][2] === getSelectedDietId()) {   //this creates a list with only days of the selected diet
-
             let day = {
                 day_id: daysList[0][i][1],
                 diet_id: daysList[0][i][2],
@@ -113,9 +139,7 @@ function getDaysList(daysList) {
                 mealfood_four: daysList[0][i][6],
                 mealfood_five: daysList[0][i][7],
             };
-
             dietDaysList.push(day);
-            //console.log(day);
         }
     }
 
@@ -240,6 +264,7 @@ function refineVariables() {
         }
     }
 
+
     // STEP 3 - select the correct day from the dayList
     for (let i = 0; i < refinedDays.length; i++) {
         if (refinedDays[i].day_id === getSelectedDay()) {
@@ -249,6 +274,7 @@ function refineVariables() {
             throw new Error("ERROR (refineVariables() - 3): day not found in diet");
         }
     }
+
 
     // STEP 3.5 - make a list of the mealGroups of that day
     dayMealsGroupIDsList = [dietDay.mealfood_one, dietDay.mealfood_two, dietDay.mealfood_three,
@@ -300,6 +326,13 @@ function freeLocalVariables() {
     foodList = null;
 }
 
+
+function cleanPage() {
+    const div = document.getElementById("table_space");
+    div.innerHTML = "";
+}
+
+
 function loadPage(
     og_diets_id_list,       // diets of the current user
     og_days_list,           // days of the current selected diets
@@ -313,7 +346,13 @@ function loadPage(
         og_meals_list, og_food_list)
     refineVariables();
     freeLocalVariables();
+    updateCurrentDay();
     tableCreate();
+}
+
+function updateCurrentDay() {
+    let dayH1 = document.getElementById("todays_date");
+    dayH1.innerText = getSelectedDay().toString();
 }
 
 function getMeals(mealGroup) {

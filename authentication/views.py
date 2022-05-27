@@ -11,6 +11,8 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
 
+from main import views
+
 from dietio import settings
 from .tokens import generate_token
 
@@ -98,7 +100,7 @@ def signin(request):
 
         if user is not None:
             login(request, user)
-            return render(request, "main/main.html")
+            return redirect("/main")
 
         else:
             messages.error(request, "wrong credentials")

@@ -79,9 +79,10 @@ DONE 25-5
     - check
 
 TODO 27-5
-    - implement the 'change-day' function
+    DONE implement the 'change-day' function
         - buttons
         - js functions
+        - update the text
     - think abot better UI ffs
     - rename from 'dietio' to 'diaita'
     - fix the links of the app
