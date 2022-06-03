@@ -57,11 +57,7 @@ def getFoodList():
     return food_list
 
 
-def load_main(request):
-    if request.method == 'POST':
-        print()
-
-    # list of the IDs of the current user's diets
+def getValues(request):
     diets_id_list = UserDietsTable.objects.filter(user_id=request.user.id).values_list('diet_id', flat=True)
     diet_list = getDietList(diets_id_list)
     diet_list_json = json.dumps(list(diet_list), cls=DjangoJSONEncoder)
@@ -70,14 +66,23 @@ def load_main(request):
     meals_list = json.dumps(list(getMealsList()), cls=DjangoJSONEncoder)
     food_list = json.dumps(list(getFoodList()), cls=DjangoJSONEncoder)
 
-    return render(request, 'main/main.html',
-                  {
-                      'diets_id_list': diet_list_json,
-                      'days_list': days_list_json,
-                      'meal_food_list': meal_food_list,
-                      'meals_list': meals_list,
-                      'food_list': food_list,
-                  })
+    complete_list = {
+        'diets_id_list': diet_list_json,
+        'days_list': days_list_json,
+        'meal_food_list': meal_food_list,
+        'meals_list': meals_list,
+        'food_list': food_list,
+    }
+    return complete_list
+
+
+def load_main(request):
+    if request.method == 'POST':
+        print()
+
+    # list of the IDs of the current user's diets
+
+    return render(request, 'main/main.html', getValues(request))
 
 
 def setUser(user_name):

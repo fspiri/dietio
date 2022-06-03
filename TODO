@@ -91,3 +91,17 @@ TODO 27-5
         - add a 'create' and 'edit' buttons
         - or automatic create for new users
 
+
+TODO WEEKLY [30.5 -> 5.6]
+    - complete and implement the 'add', 'create' and 'edit' functions
+    - IGNORE UI problems for this week
+
+
+    TODO 30-5
+        - prepare UI for the implementation of
+            DONE - 'create-diet'
+            DONE - 'edit-diet'
+            DONE - 'add-diet'
+
+    TODO 31-5
+        - implement one function completely - edit

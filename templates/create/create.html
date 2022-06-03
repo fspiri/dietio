@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>create you new diet</title>
+    <link href="../../static/bootstrap/css/bootstrap_morph.min.css" rel="stylesheet">
+    <style>
+        /* Chrome, Safari, Edge, Opera */
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        /* Firefox */
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+
+        html::-webkit-scrollbar {
+            display: none;
+        }
+
+        html {
+            -ms-overflow-style: none; /* IE and Edge */
+            scrollbar-width: none; /* Firefox */
+        }
+    </style>
+</head>
+<body style="width:100vw; height:100vh; display: flex; justify-content: center; align-content: center">
+{% block content %}
+    <div style="margin:auto; width: min(40%, 800px); text-align: center;">
+        <h1 style="">create you new diet</h1>
+
+        <br/><br/>
+        {% if submitted %}
+            {% csrf_token %}
+
+            <div class="alert alert-primary d-grid justify-content-center align-content-center">
+                <h5 class="text-secondary">diet successfully created</h5>
+
+                <form action='/edit' method="GET">
+                    <input type="hidden" name="diet_id" value="{{ diet_id }}">
+                    <input type="submit" class="btn btn-secondary my-auto"
+                           style="text-align: center; display: inline-block;" value="edit">
+                </form>
+
+            </div>
+        {% else %}
+
+            <form action="" method="POST">
+                {% csrf_token %}
+
+                {{ form.as_p }}
+
+                <input type="submit" value="submit" class="btn btn-secondary">
+            </form>
+        {% endif %}
+    </div>
+{% endblock content %}
+</body>
+
+<script src="../../static/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="" async defer></script>
+<script src="../../static/bootstrap/js/bootstrap.bundle.min.js"></script>
+</html>

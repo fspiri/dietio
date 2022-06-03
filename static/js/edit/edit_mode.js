@@ -64,7 +64,10 @@ function checkDay(val) {
 }
 
 function setSelectedDietId(val, og_diets_id_list, og_days_list, og_groupmeal_list, og_meals_list, og_food_list) {
-    selectedDietId = val;
+    if (val != null)
+        selectedDietId = val;
+    else
+        selectedDietId = 1;
     loadPage(og_diets_id_list, og_days_list, og_groupmeal_list,
         og_meals_list, og_food_list);
 }
@@ -75,7 +78,7 @@ function getSelectedDietId() {
 
 function setSelectedDay(val, og_diets_id_list, og_days_list, og_groupmeal_list, og_meals_list, og_food_list) {
     selectedDay = checkDay(val);
-    cleanPage()
+    cleanTable();
     resetRefinedVariables();
 
     loadPage(og_diets_id_list, og_days_list, og_groupmeal_list,
@@ -327,29 +330,96 @@ function freeLocalVariables() {
 }
 
 
-function cleanPage() {
-    const div = document.getElementById("table_space");
-    div.innerHTML = "";
+function cleanTable() {
+
+    for (let i = 0; i < refinedMealGroupsList.length; i++) {
+        let table = document.getElementById("active-table-" + i);
+        let size = table.childNodes[1].childNodes.length;
+
+        for (let j = 3; j < size; j++) {
+            removeRow(i);
+        }
+    }
+
 }
 
 
 function loadPage(
+    selected_id_diet,       //selected diet
     og_diets_id_list,       // diets of the current user
     og_days_list,           // days of the current selected diets
     og_groupmeal_list,      // all the meals of a part of the day (breakfast, ... )
     og_meals_list,          // food and quantity
     og_food_list,           // list of all the foods
 ) {
+    setSelectedDietId(selected_id_diet, og_diets_id_list, og_days_list,
+        og_groupmeal_list, og_meals_list, og_food_list);
     loadLocalVariables(og_diets_id_list, og_days_list, og_groupmeal_list,
         og_meals_list, og_food_list);
     freeOriginalVariables(og_diets_id_list, og_days_list, og_groupmeal_list,
         og_meals_list, og_food_list)
     refineVariables();
-
     freeLocalVariables();
     updateCurrentDay();
-    tableCreate();
 
+
+    for (let i = 0; i < Object.keys(refinedMealGroupsList).length; i++) {
+        if (loadDietPart(i) !== 0) {
+            removeFirstRow(i);
+        }
+    }
+}
+
+function save() {
+    console.log(getSelectedDietId());
+    console.log(getSelectedDay());
+}
+
+function removeFirstRow(table_num) {
+    let table = document.getElementById("active-table-" + table_num);
+    table.childNodes[1].childNodes[2].remove();
+
+}
+
+function loadDietPart(group_num) {
+    let counter = 0;
+    let nameAndQuantity = [2];
+
+    let mealsGroupList = Object.values(refinedMealGroupsList[group_num]);
+
+    for (let i = 3; i < mealsGroupList.length; i++) //takes only from the first meal_id and on
+    {
+        if (mealsGroupList[i] != null) //discards all non-specified meals
+        {
+            nameAndQuantity = getNameAndQuantity(mealsGroupList[i]); //gets foodName and foodQuantity
+            insertRow(group_num, nameAndQuantity[0], nameAndQuantity[1]);
+            counter++;
+        }
+    }
+    return counter;
+}
+
+function getNameAndQuantity(meal_id) {
+    let food_id;
+    let quantity;
+    let foodName;
+
+    for (let j = 0; j < refinedMealsList.length; j++) //searches across all meals
+    {
+        if (refinedMealsList[j].id === meal_id) {   //if it finds the same meal_id it continues
+
+            food_id = refinedMealsList[j].food_id;
+            quantity = refinedMealsList[j].quantity;
+            for (let h = 0; h < refinedFoodList.length; h++) //searches through the foodlist
+            {
+                if (refinedFoodList[h].food_id === food_id) //when it finds a matching food_id, it updates the foodName
+                {
+                    foodName = refinedFoodList[h].foodName;
+                }
+            }
+        }
+    }
+    return [foodName, quantity];
 }
 
 function updateCurrentDay() {
@@ -389,28 +459,6 @@ function getMeals(mealGroup) {
 
 }
 
-function createRows(tBody, meals) {
-
-    for (let j = 0; j < meals.length; j++) {
-        const row = document.createElement('tr');
-        row.style.lineHeight = "2px";
-        //row.style.backgroundColor = "rgba(73,87,133,0.12)";
-
-        for (let i = 0; i < 2; i++) {
-            let tD = document.createElement('td');
-            if (i === 0) {
-                tD.innerText = meals[j].name;
-                tD.colSpan = 3;
-            } else if (i === 1) {
-                tD.innerText = meals[j].quantity + " g";
-            }
-            row.append(tD);
-        }
-
-        tBody.append(row);
-    }
-}
-
 function getCompositeFoodMeals(mealFood) {
     let meals = [];
     for (let i = 0; i < refinedMealGroupsList.length; i++) {
@@ -421,66 +469,39 @@ function getCompositeFoodMeals(mealFood) {
     return meals;
 }
 
-function createDivider(tBody, dividerName) {
-    const divider = document.createElement('tr')
-    divider.innerHTML = "<strong>" + dividerName + "</strong>";
-    divider.colSpan = 3;
-    divider.style.pointerEvents = "none";
-    divider.style.lineHeight = "2em";
-    tBody.append(divider);
+function removeRow(table_num) {
+    let activeTable = document.getElementById("active-table-" + table_num);
+
+    activeTable.lastChild.lastChild.remove();
 }
 
-function tableCreate() {
+function insertRow(table_num, foodName, quantity) {
+    let activeTable = document.getElementById("active-table-" + table_num);
 
-    const div = document.getElementById("table_space");
-    div.classList.add("modal-content");
-    div.style.borderRadius = "20px";
-    div.style.display = "flex";
+    let newRow;
+    if (activeTable != null)
+        newRow = activeTable.insertRow(-1); //add at last
 
-    const tbl = document.createElement('table');
-    tbl.classList.add("table");
-    tbl.classList.add("table-hover");
-    tbl.style.width = "90%";
-    tbl.style.marginLeft = "auto";
-    tbl.style.marginRight = "auto";
-    tbl.style.marginTop = "15px";
-    tbl.style.marginBottom = "30px";
-
-
-    const head = document.createElement('thead');
-
-    const headRow = document.createElement('tr')
-    head.append(headRow);
-
-    for (let i = 0; i < 4; i++) {
-        let h = document.createElement('th');
-        h.scope = "col"
-        h.innerText = ""
-        headRow.append(h);
+    let newCell = newRow.insertCell()
+    let foodNameBox = document.createElement("input");
+    foodNameBox.setAttribute("type", "text");
+    foodNameBox.setAttribute("class", "form-control");
+    foodNameBox.setAttribute("id", "inputDefault");
+    if (foodName !== undefined) {
+        foodNameBox.value = foodName;
     }
-    const tBody = document.createElement('tbody');
 
-    createDivider(tBody, "breakfast");
-    createRows(tBody, getCompositeFoodMeals(dietDay.mealfood_one));
+    //foodNameBox.setAttribute("placeholder", foodName);
+    newCell.appendChild(foodNameBox);
 
+    newCell = newRow.insertCell()
+    let quantityBox = newCell.appendChild(document.createElement("input"));
+    quantityBox.setAttribute("type", "number");
+    quantityBox.setAttribute("class", "form-control");
+    quantityBox.setAttribute("id", "inputDefault");
+    if (quantity !== undefined) {
+        quantityBox.value = quantity;
+    }
+    //quantityBox.setAttribute("placeholder", quantity);
 
-    createDivider(tBody, "morning snack");
-    createRows(tBody, getCompositeFoodMeals(dietDay.mealfood_two));
-
-
-    createDivider(tBody, "lunch");
-    createRows(tBody, getCompositeFoodMeals(dietDay.mealfood_three));
-
-
-    createDivider(tBody, "afternoon snack");
-    createRows(tBody, getCompositeFoodMeals(dietDay.mealfood_four));
-
-
-    createDivider(tBody, "dinner");
-    createRows(tBody, getCompositeFoodMeals(dietDay.mealfood_five));
-
-
-    tbl.append(head);
-    tbl.append(tBody);
-    div.appendChild(tbl);
 }

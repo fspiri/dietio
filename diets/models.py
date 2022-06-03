@@ -81,7 +81,7 @@ class DietTable(models.Model):
     diet_id = models.AutoField(primary_key=True)  # to not use the default 'id; given by django
     dietName = models.CharField(max_length=50)
     dietType = models.ForeignKey(DietTypes, on_delete=models.PROTECT)
-    startDate = models.DateTimeField()
+    startDate = models.DateTimeField(auto_now_add=True)
     dayLength = models.IntegerField()
 
     def __str__(self):

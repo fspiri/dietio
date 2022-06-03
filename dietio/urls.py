@@ -41,6 +41,7 @@ urlpatterns = [
     path('', include('authentication.urls')),
     path('edit/', include('edit_diet.urls')),
     path('main/', include('main.urls')),
+    path('create/', include('create.urls')),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 
 ]

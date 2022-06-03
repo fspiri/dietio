@@ -22,7 +22,7 @@
     </div>
 </header>
 
-<body class="w-100 h-100 justify-content-center align-items-center mx-auto position-absolute"
+<body class=" w-100 h-100 justify-content-center align-items-center mx-auto position-absolute"
       onload="(loadPage(
               {{ diets_id_list }},
               {{ days_list }},
@@ -37,38 +37,62 @@
     </div>
 {% endfor %}
 
-
-<div class="w-100 d-flex justify-content-center align-items-center position-relative"
-     style="height: 70vh;" id="tab-container">
-    <button type="button" class="btn btn-primary mx-auto h-25"
-            style="position:relative; margin-top: auto; margin-bottom: auto;"
-            onclick="setSelectedDay(
-                    (getSelectedDay() - 1),
-                    {{ diets_id_list }},
-                    {{ days_list }},
-                    {{ meal_food_list }},
-                    {{ meals_list }},
-                    {{ food_list }})">
-        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-caret-left"
-             viewBox="0 0 16 16">
-            <path d="M10 12.796V3.204L4.519 8 10 12.796zm-.659.753-5.48-4.796a1 1 0 0 1 0-1.506l5.48-4.796A1 1 0 0 1 11 3.204v9.592a1 1 0 0 1-1.659.753z"/>
-        </svg>
-    </button>
-    <div class="w-75 mx-auto" id="table_space" style="">
+<div style="display: grid;">
+    <div class="w-100 d-flex justify-content-center align-items-center position-relative"
+         style="height: 70vh;" id="tab-container">
+        <button type="button" class="btn btn-primary mx-auto h-25"
+                style="position:relative; margin-top: auto; margin-bottom: auto;"
+                onclick="setSelectedDay(
+                        (getSelectedDay() - 1),
+                        {{ diets_id_list }},
+                        {{ days_list }},
+                        {{ meal_food_list }},
+                        {{ meals_list }},
+                        {{ food_list }})">
+            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-caret-left"
+                 viewBox="0 0 16 16">
+                <path d="M10 12.796V3.204L4.519 8 10 12.796zm-.659.753-5.48-4.796a1 1 0 0 1 0-1.506l5.48-4.796A1 1 0 0 1 11 3.204v9.592a1 1 0 0 1-1.659.753z"/>
+            </svg>
+        </button>
+        <div class="w-75 mx-auto" id="table_space" style="">
+        </div>
+        <button type="button" class="btn btn-primary mx-auto h-25"
+                onclick="setSelectedDay(
+                        (getSelectedDay() + 1),
+                        {{ diets_id_list }},
+                        {{ days_list }},
+                        {{ meal_food_list }},
+                        {{ meals_list }},
+                        {{ food_list }})">
+            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-caret-right"
+                 viewBox="0 0 16 16">
+                <path d="M6 12.796V3.204L11.481 8 6 12.796zm.659.753 5.48-4.796a1 1 0 0 0 0-1.506L6.66 2.451C6.011 1.885 5 2.345 5 3.204v9.592a1 1 0 0 0 1.659.753z"/>
+            </svg>
+        </button>
     </div>
-    <button type="button" class="btn btn-primary mx-auto h-25"
-            onclick="setSelectedDay(
-                    (getSelectedDay() + 1),
-                    {{ diets_id_list }},
-                    {{ days_list }},
-                    {{ meal_food_list }},
-                    {{ meals_list }},
-                    {{ food_list }})">
-        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-caret-right"
-             viewBox="0 0 16 16">
-            <path d="M6 12.796V3.204L11.481 8 6 12.796zm.659.753 5.48-4.796a1 1 0 0 0 0-1.506L6.66 2.451C6.011 1.885 5 2.345 5 3.204v9.592a1 1 0 0 0 1.659.753z"/>
-        </svg>
-    </button>
+
+
+    <div id="buttonsbar"
+         style="margin-top: max(5vh, 50px); margin-left:auto; margin-right: auto; width:70%; display: flex; justify-content: center; align-content: center;">
+        <button type="submit" class="btn btn-primary" style="margin-right: 30px;">
+            select other diet
+        </button>
+
+        <form action="/edit">
+            <button type="submit" class="btn btn-primary" style="margin-right: 30px;">
+                edit diet
+            </button>
+        </form>
+
+        <form action="/create">
+            <button type="submit" class="btn btn-primary" style="margin-right: 30px;">
+                create new diet
+            </button>
+        </form>
+
+
+    </div>
+
 </div>
 
 
