@@ -238,7 +238,6 @@ function freeOriginalVariables(og_diets_id_list, og_days_list, og_groupmeal_list
 
 // takes the local variables and keeps only what is needed for the rendering
 function refineVariables() {
-
     // STEP 0 - initialize the diet variable ( will **NOT** work with the dietList after )
     for (let i = 0; i < diets_list.length; i++) {
         if (diets_list[i][0] === getSelectedDietId().toString()) {
@@ -319,13 +318,17 @@ function refineVariables() {
 // frees up resources used to store entire JSON to lists
 // makes variables eligible for being garbage-collected
 function freeLocalVariables() {
-    diets_list = null;
+    //diets_list = null;
     daily_list = null;
     mealsGroupList = null;
     mealsList = null;
     foodList = null;
 }
 
+
+function redirectToEdit() {
+    location.replace("/edit?diet_id=" + getSelectedDietId());
+}
 
 function cleanPage() {
     const div = document.getElementById("table_space");
@@ -349,7 +352,24 @@ function loadPage(
     freeLocalVariables();
     updateCurrentDay();
     tableCreate();
+    loadDropDownElements();
+}
 
+function loadDropDownElements() {
+    document.getElementById("dropdownMenuButton1").innerText = selectedDiet[1];
+    document.getElementById("dropdownMenu1").innerHTML = "";
+    let menu = document.getElementById("dropdownMenu1");
+
+    for (let i = 0; i < diets_list.length; i++) {
+        let li = document.createElement("li")
+        let a = document.createElement("a")
+        a.innerText = textContent = diets_list[i][1];
+        a.setAttribute("href", "#");
+        a.style.textAlign = "center";
+        a.classList.add("dropdown-item");
+        li.appendChild(a);
+        menu.appendChild(li);
+    }
 }
 
 function updateCurrentDay() {
@@ -390,15 +410,16 @@ function getMeals(mealGroup) {
 }
 
 function createRows(tBody, meals) {
-
     for (let j = 0; j < meals.length; j++) {
         const row = document.createElement('tr');
         row.style.lineHeight = "2px";
         //row.style.backgroundColor = "rgba(73,87,133,0.12)";
 
-        for (let i = 0; i < 2; i++) {
+        for (let i = 0; i < 1; i++) {
+            console.log(j)
             let tD = document.createElement('td');
             if (i === 0) {
+                console.log(meals[j].name)
                 tD.innerText = meals[j].name;
                 tD.colSpan = 3;
             } else if (i === 1) {

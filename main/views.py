@@ -73,6 +73,7 @@ def getValues(request):
         'meals_list': meals_list,
         'food_list': food_list,
     }
+
     return complete_list
 
 

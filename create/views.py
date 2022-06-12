@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 
 from diets.models import DietTable
-from diets.models import DietTypes
+from diets.models import DietTypes, UserDietsTable
 from .forms import DietForm
 
 from dal import autocomplete
@@ -28,10 +28,11 @@ def create(request):
     submitted = False
     diet_name = ""
     if request.method == 'POST':
-        print(request.body)
         form = DietForm(request.POST)
         if form.is_valid():
             form.save()
+            UserDietsTable.objects.create(user_id=request.user, diet_id=DietTable.objects.latest('diet_id'))
+            # UserDietsTable.objects.create()
             return HttpResponseRedirect(
                 '/create?submitted=True&diet_id=' + str(DietTable.objects.latest('diet_id').diet_id))
     else:

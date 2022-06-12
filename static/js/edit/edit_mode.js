@@ -63,13 +63,13 @@ function checkDay(val) {
 
 }
 
-function setSelectedDietId(val, og_diets_id_list, og_days_list, og_groupmeal_list, og_meals_list, og_food_list) {
-    if (val != null)
-        selectedDietId = val;
-    else
+function setSelectedDietId(val) {
+    if (val != null) {
+        if (selectedDietId !== val) {
+            selectedDietId = val;
+        }
+    } else
         selectedDietId = 1;
-    loadPage(og_diets_id_list, og_days_list, og_groupmeal_list,
-        og_meals_list, og_food_list);
 }
 
 function getSelectedDietId() {
@@ -127,12 +127,16 @@ creates and returns an array of objects of days of the selected diet.
     day = {day_id, diet_id, mealfood_one, mealfood_two,
             mealfood_three, mealfood_four, mealfood_five }
  */
+function redirectToMain() {
+    location.replace("/main?diet_id=" + getSelectedDietId());
+}
+
 function getDaysList(daysList) {
     //plan is to gather from the DaysOfTheWeekTable all the days_id which have the same id as te selected diet
     let dietDaysList = [];
 
     for (let i = 0; i < daysList[0].length; i++) {
-        if (daysList[0][i][2] === getSelectedDietId()) {   //this creates a list with only days of the selected diet
+        if (daysList[0][i][2] === parseInt(getSelectedDietId())) {   //this creates a list with only days of the selected diet
             let day = {
                 day_id: daysList[0][i][1],
                 diet_id: daysList[0][i][2],
@@ -256,7 +260,6 @@ function refineVariables() {
     if (getSelectedDay() > parseInt(selectedDiet[2])) {
         throw new Error("ERROR (refineVariable() - 3): selected day higher than number of days in the diet");
     }
-
     // STEP 2 - select only the days of the selectedList
     for (let i = 0; i < daily_list.length; i++) {
         if (daily_list[i].diet_id.toString() === selectedDiet[0]) {
@@ -322,7 +325,7 @@ function refineVariables() {
 // frees up resources used to store entire JSON to lists
 // makes variables eligible for being garbage-collected
 function freeLocalVariables() {
-    diets_list = null;
+    //diets_list = null;
     daily_list = null;
     mealsGroupList = null;
     mealsList = null;
@@ -345,15 +348,19 @@ function cleanTable() {
 
 
 function loadPage(
-    selected_id_diet,       //selected diet
     og_diets_id_list,       // diets of the current user
     og_days_list,           // days of the current selected diets
     og_groupmeal_list,      // all the meals of a part of the day (breakfast, ... )
     og_meals_list,          // food and quantity
     og_food_list,           // list of all the foods
 ) {
-    setSelectedDietId(selected_id_diet, og_diets_id_list, og_days_list,
-        og_groupmeal_list, og_meals_list, og_food_list);
+
+    let params = new URLSearchParams(window.location.search)
+    let selected_id_diet = params.get("diet_id");
+
+
+    setSelectedDietId(selected_id_diet, og_diets_id_list, og_days_list, og_groupmeal_list,
+        og_meals_list, og_food_list);
     loadLocalVariables(og_diets_id_list, og_days_list, og_groupmeal_list,
         og_meals_list, og_food_list);
     freeOriginalVariables(og_diets_id_list, og_days_list, og_groupmeal_list,
@@ -361,6 +368,7 @@ function loadPage(
     refineVariables();
     freeLocalVariables();
     updateCurrentDay();
+    loadDropDownElements();
 
 
     for (let i = 0; i < Object.keys(refinedMealGroupsList).length; i++) {
@@ -370,9 +378,123 @@ function loadPage(
     }
 }
 
+function loadDropDownElements() {
+    document.getElementById("dropdownMenuButton1").innerText = selectedDiet[1];
+    document.getElementById("dropdownMenu1").innerHTML = "";
+    let menu = document.getElementById("dropdownMenu1");
+
+    for (let i = 0; i < diets_list.length; i++) {
+        let li = document.createElement("li")
+        let a = document.createElement("a")
+        a.innerText = textContent = diets_list[i][1];
+        a.setAttribute("href", "#");
+        a.style.textAlign = "center";
+        a.classList.add("dropdown-item");
+        li.appendChild(a);
+        menu.appendChild(li);
+    }
+}
+
 function save() {
-    console.log(getSelectedDietId());
-    console.log(getSelectedDay());
+    const NUMBEROFDAYPARTS = 5;
+    let day = getSelectedDay();
+    let diet_id = getSelectedDietId();
+
+    let foodFlag = false;
+    let mealGroupFlag = false;
+
+    let tempFood;
+    let tempGroup;
+    /*
+    n = number of meals
+
+    <table> --> { <tbody> --> ( n+1 ) <tr> --> { 2 <td>:---> {   foodName[input:text]   }
+                                                         \-> {   qty[input:numeric]     }
+     */
+    let bodiesList = [];
+    for (let i = 0; i < NUMBEROFDAYPARTS; i++)
+        bodiesList.push(document.getElementById("active-table-" + i).getElementsByTagName("tbody")[0]);
+
+
+    let groupMealsList = [bodiesList.length];
+    for (let i = 0; i < bodiesList.length; i++) {
+        let mealsList = [];
+        for (let j = 1; j < bodiesList[i].getElementsByTagName("tr").length; j++) {
+            /*
+            TODO - searching inside the refined food list is a problem, because what if the user inputs a food
+                that is not currently being used? find a way to keep the original list
+             */
+            for (let a = 0; a < refinedFoodList.length; a++) {
+                if (refinedFoodList[a].foodName ===
+                    bodiesList[i].getElementsByTagName("tr")[j].getElementsByTagName("td")[0].getElementsByTagName("input")[0].value) {
+
+                    tempFood = refinedFoodList[a];
+                    foodFlag = true;
+                }
+            }
+
+            for (let a = 0; a < refinedMealGroupsList.length; a++) {
+                if (parseInt(diet_id) === parseInt(refinedMealGroupsList[a].diet_id)
+                    && parseInt(refinedMealGroupsList[a].mealNumberOfTheDay) === i + 1) {
+
+                    tempGroup = refinedMealGroupsList[a];
+                    mealGroupFlag = true;
+                }
+            }
+
+            if (foodFlag && mealGroupFlag) {
+                let meal = {
+                    day: day,
+                    diet_id: parseInt(diet_id),
+                    mealGroup_id: tempGroup.mealGroup_id,
+                    mealNumberOfTheDay: tempGroup.mealNumberOfTheDay,
+                    food_id: tempFood.food_id,
+                    foodName: bodiesList[i].getElementsByTagName("tr")[j].getElementsByTagName("td")[0].getElementsByTagName("input")[0].value,
+                    quantity: bodiesList[i].getElementsByTagName("tr")[j].getElementsByTagName("td")[1].getElementsByTagName("input")[0].value,
+                }
+                mealsList.push(meal);
+            }
+        }
+        groupMealsList[i] = mealsList;
+    }
+
+    let processedMeals = [];
+    let processedMealGroups = [];
+    for (let i = 0; i < groupMealsList.length; i++) {
+        for (let j = 0; j < groupMealsList[i].length; j++) {
+            let newMeal = {
+                id: refinedMealGroupsList[i].meal_1,
+                food_id: groupMealsList[i][j].food_id,
+                quantity: groupMealsList[i][j].quantity,
+            }
+            processedMeals.push(newMeal);
+        }
+        for (let e = 0; e < processedMeals.length; e++) {
+
+
+        }
+        let counter = 1;
+        let newMealGroup = {
+            id: refinedMealGroupsList[i].id,
+            diet_id: diet_id,
+            mealNumberOfTheDay: counter++,
+            meal_id_1: processedMeals[1].id || '',
+            meal_id_2: '',
+            meal_id_3: '',
+            meal_id_4: '',
+            meal_id_5: '',
+            meal_id_6: '',
+            meal_id_7: '',
+            meal_id_8: '',
+            meal_id_9: '',
+            meal_id_10: '',
+        }
+        processedMealGroups.push(newMealGroup);
+
+    }
+    console.log(processedMealGroups)
+    console.log(groupMealsList);
+
 }
 
 function removeFirstRow(table_num) {
@@ -457,16 +579,6 @@ function getMeals(mealGroup) {
     }
     return compound;
 
-}
-
-function getCompositeFoodMeals(mealFood) {
-    let meals = [];
-    for (let i = 0; i < refinedMealGroupsList.length; i++) {
-        if (refinedMealGroupsList[i].mealGroup_id === mealFood) {
-            meals = getMeals(refinedMealGroupsList[i]);
-        }
-    }
-    return meals;
 }
 
 function removeRow(table_num) {

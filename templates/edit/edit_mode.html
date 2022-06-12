@@ -19,28 +19,44 @@
             -moz-appearance: textfield;
         }
     </style>
+
+
 </head>
 
 <header class="title-box w-100 justify-content-center align-items-center text-center sticky-top"
-
         style="display:grid; grid-template-columns: 1fr 1fr 1fr; margin-top: 2vh;">
-    <div class="d-flex justify-content-center align-items-center " style="margin-left: 5vw; grid-column-start: 0;">
-        <small class="form-text" style="font-size: 1.3em;">welcome: </small>
-        <h1 style="font-size: 2.5em;" id="username_title margin:auto">{{ user }}</h1>
-    </div>
-    <div class="d-flex justify-content-center align-items-center" style="margin-right: 5vw; grid-column-start: 3;">
-        <small class="form-text" style="font-size: 1.3em;"> day &nbsp </small>
 
-        <h1 style="font-size: 2.5em;" id="todays_date">today</h1>
-        <small class="form-text" style="font-size: 1.3em;"> &nbsp of the diet</small>
-        <h1></h1>
-        <h1>{{ diet_id }}</h1>
+    <div style="width:100vw; display: flex; align-content: center; justify-content: center; margin: auto;">
+        <div style="margin: auto;">
+            <button onclick="redirectToMain()" type="submit" class="btn btn-primary">go to your diet</button>
+            <button type="submit" class="btn btn-primary" style="margin: auto" onclick="save()">Save</button>
+        </div>
+
+        <div class="d-flex justify-content-center align-items-center" style="margin: auto; grid-column-start: 3;">
+            <small class="form-text" style="font-size: 1.3em;"> day &nbsp </small>
+
+            <h1 style="font-size: 2.5em;" id="todays_date">today</h1>
+            <small class="form-text" style="font-size: 1.3em;"> &nbsp of the diet</small>
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                    my diet
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" id="dropdownMenu1">
+                    <li><a class="dropdown-item" href="#">Action</a></li>
+                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                </ul>
+            </div>
+            <h1></h1>
+        </div>
     </div>
+
+
 </header>
 
 <body class=" w-100 h-100 justify-content-center align-items-center mx-auto position-absolute"
       onload="(loadPage(
-              {{ diet_id }},
               {{ diets_id_list }},
               {{ days_list }},
               {{ meal_food_list }},
@@ -65,7 +81,8 @@
                 <path d="M10 12.796V3.204L4.519 8 10 12.796zm-.659.753-5.48-4.796a1 1 0 0 1 0-1.506l5.48-4.796A1 1 0 0 1 11 3.204v9.592a1 1 0 0 1-1.659.753z"></path>
             </svg>
         </button>
-        <div class="w-75 mx-auto modal-content" id="table_space" style="max-width: 75vw; border-radius:20px;">
+        <div class="w-75 mx-auto modal-content" id="table_space"
+             style="max-width: 75vw; border-radius:20px; margin: auto;">
             <table class="table table-hover" style="border-collapse:separate; border-spacing: 0 0.2em;">
                 <tbody>
                 <tr style=" padding: 5px;">
@@ -260,20 +277,17 @@
     </div>
 
 
-    <div id="buttonsbar"
-         style="margin-top: max(5vh, 50px); margin-left:auto; margin-right: auto; width:70%; display: flex; justify-content: center; align-content: center;">
-        <button type="submit" class="btn btn-primary" style="margin-right: 30px;" onclick="save()">
-            Save
-        </button>
-    </div>
-
 </div>
 
 
-<script src="../../static/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+        crossorigin="anonymous"></script>
+
 <script src="" async defer></script>
-<script src="../../static/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!--<script src="../../static/js/edit/main.js"></script>-->
 <script src="../../static/js/edit/edit_mode.js"></script>
 
 </body>
