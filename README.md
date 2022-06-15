@@ -1,4 +1,4 @@
-# Dietio
+# Diaita
 ## is all about simplifying
 ***
 
