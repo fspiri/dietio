@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <title>Order Ticket</title>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="#">Ticket Service</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        Concerts
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="#">Concert 1</a></li>
+                        <li><a class="dropdown-item" href="#">Concert 2</a></li>
+                        <li><a class="dropdown-item" href="#">Concert 3</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled">About us</a>
+                </li>
+            </ul>
+            <form class="d-flex">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+
+            </form>
+        </div>
+    </div>
+</nav>
+<div style="padding: 5%;">
+    <h1>Order ticket</h1>
+    <img src="concert.png" class="img-fluid mb-2 d-none d-lg-block"/>
+
+    <form class="row-cols-md-12 row-cols-xs-4 needs-validation" novalidate>
+
+        <br>
+
+        <div class="row">
+
+            <!-- DATA -->
+            <div class="col-md-6 col-xs-4">
+                <label for="validation-Calender" class="form-label"> Date of concert:</label>
+                <select class="form-select" id="validation-Calender" required>
+                    <option value="">Select a date</option>
+                    <option>01.04.2020</option>
+                    <option>02.04.2020</option>
+                    <option>03.04.2020</option>
+                    <option>04.04.2020</option>
+                    <option>05.04.2020</option>
+                    <option>06.04.2020</option>
+                </select>
+                <div class="valid-feedback">Looks good!</div>
+                <div class="invalid-feedback">Please choose one Date</div>
+            </div>
+
+            <div class="d-block d-md-none"><br></div>
+
+            <!-- LOCATION -->
+            <div class="form-check col-md-6 col-xs-4">
+                <label for="validation-Location" class="form-label">Location</label>
+                <div>
+                    <input id="validation-Location" name="location" type="radio" required>
+                    <label for="bolzano">Bolzano/Bozen</label>
+                    <input id="merano" name="location" type="radio" required>
+                    <label for="merano">Merano/Meran</label>
+                    <div class="valid-feedback">Looks good!</div>
+                    <div class="invalid-feedback">Please choose one</div>
+                </div>
+            </div>
+
+        </div>
+
+        <br>
+
+        <div class="row">
+
+            <!-- FIRST NAME -->
+            <div class="col-md-6 col-xs-4">
+                <label for="first-Name" class="form-label">First Name</label>
+                <input type="text" class="form-control" id="first-Name" required>
+                <div class="valid-feedback">Looks good!</div>
+                <div class="invalid-feedback">Please insert your First Name!</div>
+            </div>
+
+            <div class="d-block d-md-none"><br></div>
+
+            <!-- LAST NAME -->
+            <div class="col-md-6 col-xs-4">
+                <label for="last-Name" class="form-label">Last Name</label>
+                <input type="text" class="form-control" id="last-Name" required>
+                <div class="valid-feedback">Looks good!</div>
+                <div class="invalid-feedback">Please insert your Last Name!</div>
+            </div>
+
+        </div>
+
+        <br>
+
+        <div class="row">
+
+            <!-- EMAIL -->
+            <div class="col-md-12 col-xs-4">
+                <label for="validationCustomUsername" class="form-label">E-Mail</label>
+                <div class="input-group has-validation">
+                    <input type="text" class="form-control" id="validationCustomUsername"
+                           aria-describedby="inputGroupPrepend" placeholder="youremail@example.com" required>
+                    <div class="valid-feedback">Looks good!</div>
+                    <div class="invalid-feedback">Please insert an E-Mail!</div>
+                </div>
+            </div>
+
+        </div>
+
+        <br>
+
+        <div class="row">
+
+            <!-- COUNTRY -->
+            <div class="col-md-5 col-xs-4">
+                <label for="validationCustom03" class="form-label">Country</label>
+                <select class="form-select" id="validation-Calender" required>
+                    <option value="">Select your country</option>
+                    <option>France</option>
+                    <option>Italy</option>
+                    <option>German</option>
+                    <option>Spain</option>
+                    <option>Austria</option>
+                    <option>Portugal</option>
+                </select>
+                <div class="valid-feedback">Looks good!</div>
+                <div class="invalid-feedback">Please select a Country!</div>
+            </div>
+
+            <div class="d-block d-md-none"><br></div>
+
+            <!-- CITY -->
+            <div class="col-md-4 col-xs-4">
+                <label for="validationCustom04" class="form-label">City</label>
+                <input type="text" class="form-control" id="validationCustom04" required>
+                <div class="valid-feedback">Looks good!</div>
+                <div class="invalid-feedback">Please insert a City!</div>
+            </div>
+
+            <div class="d-block d-md-none"><br></div>
+
+            <!-- ZIP -->
+            <div class="col-md-3 col-xs-4">
+                <label for="validationCustom05" class="form-label">Zip</label>
+                <input type="text" class="form-control" id="validationCustom05" required>
+                <div class="valid-feedback">Looks good!</div>
+                <div class="invalid-feedback">Please insert a Zip!</div>
+            </div>
+
+        </div>
+
+        <br>
+        <hr>
+        <br>
+
+
+        <!-- SEND & RESET -->
+        <!-- <div class="row"> -->
+        <div class="d-none d-md-block">
+            <button class="btn btn-success col-md-2 col-sm-5 col-5" type="submit"
+                    style="height:50px; text-align:center; line-height: 0.5em;">Send
+            </button>
+            <button class="btn btn-danger col-md-2 col-sm-5 col-5" type="submit"
+                    style="height:50px; text-align:center; line-height: 0.5em;">Reset
+            </button>
+        </div>
+
+        <div class="d-md-none d-block text-center">
+            <button class="btn btn-success col-md-2 col-sm-5 col-5" type="submit"
+                    style="height:50px; text-align:center; line-height: 0.5em;">Send
+            </button>
+            <button class="btn btn-danger col-md-2 col-sm-5 col-5" type="submit"
+                    style="height:50px; text-align:center; line-height: 0.5em;">Reset
+            </button>
+        </div>
+        <!-- </div> -->
+
+    </form>
+
+    <!-- Optional JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+            crossorigin="anonymous"></script>
+
+    <script type="text/javascript" src="form-validation.js"></script>
+</div>
+</body>
+</html>

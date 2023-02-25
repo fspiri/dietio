@@ -1,0 +1,65 @@
+html::-webkit-scrollbar {
+    display: none;
+}
+
+html {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
+
+#table_space::-webkit-scrollbar {
+    display: none;
+}
+
+#table_space {
+    overflow-y: scroll;
+    overflow-x: hidden;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    height: fit-content;
+    max-width: 800px;
+    max-height: 1200px;
+
+}
+
+#tab-container {
+    
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+
+/* XXS */
+@media only screen and (max-width: 600px) {
+
+}
+
+/* S */
+@media only screen and (min-width: 600px) {
+
+}
+
+/* M */
+@media only screen and (min-width: 768px) {
+
+}
+
+/* L */
+@media only screen and (min-width: 992px) {
+
+}
+
+/* XL */
+@media only screen and (min-width: 1200px) {
+
+}
