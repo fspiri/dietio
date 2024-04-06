@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en" style="width: 100%">
+<head>
+    <meta charset="UTF-8">
+    <title>create</title>
+    <link href="../../static/bootstrap/css/bootstrap_morph.min.css" rel="stylesheet">
+    <style>
+
+    </style>
+</head>
+<body style="width: 100%; letter-spacing: 0.4em;">
+<div style="display: grid; justify-content: center; margin:15px auto;">
+    <h1 style="letter-spacing: 0.4em;">create your diet</h1>
+    <h2 id="edit__day-h2" style="margin: 20px auto;">monday</h2>
+</div>
+
+<table class="table table-hover" style="border-collapse:separate;
+  border-spacing: 0 0.2em; width: 100%;">
+    <tbody>
+    <tr>
+        <td>Breakfast</td>
+        <td colspan="6">
+            <table id="active-table-0">
+                <tr id="row_0">
+                    <td style="width:62%" id="food_name_1">
+                        <input type="text" class="form-control" id="inputDefault_1" placeholder="food">
+                    </td>
+                    <td><input type="text" inputmode="numeric" class="form-control"
+                               id="inputDefault" placeholder="grams"></td>
+                    <td><input type="text" inputmode="numeric" class="form-control"
+                               id="inputDefault" placeholder="cal/100g"></td>
+                    <td><input type="text" inputmode="numeric" class="form-control"
+                               id="inputDefault" placeholder="prot/100g"></td>
+                    <td><input type="text" inputmode="numeric" class="form-control"
+                               id="inputDefault" placeholder="cost/100g"></td>
+                </tr>
+            </table>
+        </td>
+        <td>
+            <button type="button" class="btn btn-primary" onclick="insertRow(0)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                     class="bi bi-plus-circle w-auto h-auto"
+                     viewBox="0 0 16 16">
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                </svg>
+            </button>
+        </td>
+    </tr>
+    <tr class="spacer"></tr>
+    <tr>
+        <td>Snack</td>
+        <td colspan="6">
+            <table id="active-table-1">
+                <tr id="row_1">
+                    <td style="width:62%">
+                        <input type="text" class="form-control" id="inputDefault" placeholder="food">
+                    </td>
+                    <td><input type="text" inputmode="numeric" class="form-control"
+                               id="inputDefault" placeholder="grams"></td>
+                    <td><input type="text" inputmode="numeric" class="form-control"
+                               id="inputDefault" placeholder="cal/100g"></td>
+                    <td><input type="text" inputmode="numeric" class="form-control"
+                               id="inputDefault" placeholder="prot/100g"></td>
+                    <td><input type="text" inputmode="numeric" class="form-control"
+                               id="inputDefault" placeholder="cost/100g"></td>
+                </tr>
+            </table>
+        </td>
+        <td>
+            <button type="button" class="btn btn-primary" onclick="insertRow(1)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                     class="bi bi-plus-circle w-auto h-auto"
+                     viewBox="0 0 16 16">
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                </svg>
+            </button>
+        </td>
+    </tr>
+    <tr>
+    <tr class="spacer"></tr>
+    <td>Lunch</td>
+    <td colspan="6">
+        <table id="active-table-2">
+            <tr id="row_2">
+                <td style="width:62%">
+                    <input type="text" class="form-control" id="inputDefault" placeholder="food">
+                </td>
+                <td><input type="text" inputmode="numeric" class="form-control"
+                           id="inputDefault" placeholder="grams"></td>
+                <td><input type="text" inputmode="numeric" class="form-control"
+                           id="inputDefault" placeholder="cal/100g"></td>
+                <td><input type="text" inputmode="numeric" class="form-control"
+                           id="inputDefault" placeholder="prot/100g"></td>
+                <td><input type="text" inputmode="numeric" class="form-control"
+                           id="inputDefault" placeholder="cost/100g"></td>
+            </tr>
+        </table>
+    </td>
+    <td>
+        <button type="button" class="btn btn-primary" onclick="insertRow(2)">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                 class="bi bi-plus-circle w-auto h-auto"
+                 viewBox="0 0 16 16">
+                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+            </svg>
+        </button>
+    </td>
+    </tr>
+    <tr>
+    <tr class="spacer"></tr>
+    <td>Snack</td>
+    <td colspan="6">
+        <table id="active-table-3">
+            <tr id="row_3">
+                <td style="width:62%">
+                    <input type="text" class="form-control" id="inputDefault" placeholder="food">
+                </td>
+                <td><input type="text" inputmode="numeric" class="form-control"
+                           id="inputDefault" placeholder="grams"></td>
+                <td><input type="text" inputmode="numeric" class="form-control"
+                           id="inputDefault" placeholder="cal/100g"></td>
+                <td><input type="text" inputmode="numeric" class="form-control"
+                           id="inputDefault" placeholder="prot/100g"></td>
+                <td><input type="text" inputmode="numeric" class="form-control"
+                           id="inputDefault" placeholder="cost/100g"></td>
+            </tr>
+        </table>
+    </td>
+    <td>
+        <button type="button" class="btn btn-primary" onclick="insertRow(3)">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                 class="bi bi-plus-circle w-auto h-auto"
+                 viewBox="0 0 16 16">
+                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+            </svg>
+        </button>
+    </td>
+    </tr>
+    <tr>
+    <tr class="spacer"></tr>
+    <td>Dinner</td>
+    <td colspan="6">
+        <table id="active-table-4">
+            <tr id="row_4">
+                <td style="width:62%">
+                    <input type="text" class="form-control" id="inputDefault" placeholder="food">
+                </td>
+                <td><input type="text" inputmode="numeric" class="form-control"
+                           id="inputDefault" placeholder="grams"></td>
+                <td><input type="text" inputmode="numeric" class="form-control"
+                           id="inputDefault" placeholder="cal/100g"></td>
+                <td><input type="text" inputmode="numeric" class="form-control"
+                           id="inputDefault" placeholder="prot/100g"></td>
+                <td><input type="text" inputmode="numeric" class="form-control"
+                           id="inputDefault" placeholder="cost/100g"></td>
+            </tr>
+        </table>
+    </td>
+    <td>
+        <button type="button" class="btn btn-primary" onclick="insertRow(4)">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                 class="bi bi-plus-circle w-auto h-auto"
+                 viewBox="0 0 16 16">
+                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+            </svg>
+        </button>
+    </td>
+    </tr>
+
+
+    </tbody>
+</table>
+<div style="display: flex; justify-content: center; width: 70%; margin: 80px auto 40px auto; text-align: left">
+    <button class="btn btn-outline-warning" href="/save" id="edit-day-btn-1" onclick="processDayButtonClick(1)"
+            style="width: 80px; letter-spacing: 0.4em; margin: auto; text-align: center">mon
+    </button>
+    <button class="btn btn-outline-secondary" href="/save" id="edit-day-btn-2" onclick="processDayButtonClick(2)"
+            style="width: 80px; letter-spacing: 0.4em; margin: auto; text-align: center">tue
+    </button>
+    <button class="btn btn-outline-secondary" href="/save" id="edit-day-btn-3" onclick="processDayButtonClick(3)"
+            style="width: 80px; letter-spacing: 0.4em; margin: auto; text-align: center">wed
+    </button>
+    <button class="btn btn-outline-secondary" href="/save" id="edit-day-btn-4" onclick="processDayButtonClick(4)"
+            style="width: 80px; letter-spacing: 0.4em; margin: auto;text-align: center">thu
+    </button>
+    <button class="btn btn-outline-secondary" href="/save" id="edit-day-btn-5" onclick="processDayButtonClick(5)"
+            style="width: 80px; letter-spacing: 0.4em; margin: auto;text-align: center">fri
+    </button>
+    <button class="btn btn-outline-secondary" href="/save" id="edit-day-btn-6" onclick="processDayButtonClick(6)"
+            style="width: 80px; letter-spacing: 0.4em; margin: auto;text-align: center">sat
+    </button>
+    <button class="btn btn-outline-secondary" href="/save" id="edit-day-btn-7" onclick="processDayButtonClick(7)"
+            style="width: 80px; letter-spacing: 0.4em; margin: auto; text-align: center">sun
+    </button>
+    <button class="btn btn-outline-primary" href="/save" id="edit-day-btn-8"
+            onclick="processDayButtonClick(7); getData()"
+            style="width: 80px; letter-spacing: 0.4em; margin: auto; text-align: center">save
+    </button>
+</div>
+<div class="progress" style="width: 70%; margin: auto">
+    <div class="progress-bar" role="progressbar" style="width: 1%;" aria-valuenow="25" aria-valuemin="0"
+         aria-valuemax="100" id="edit__progress-bar"></div>
+</div>
+</body>
+<script src="../../static/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="../../static/js/edit/edit.js"></script>
+
+</html>
