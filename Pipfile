@@ -4,12 +4,11 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-dal = "*"
+django-autocomplete-light = "*"
 djangorestframework = "*"
 
 [dev-packages]
-dal = "*"
-djangorestframework = "*"
+
 
 [requires]
 python_version = "3.10"
